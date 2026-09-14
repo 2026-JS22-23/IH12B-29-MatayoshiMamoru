@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>沖縄の観光スポット紹介</title>
+    <link rel="stylesheet" href="map.css">
+</head>
+
+
+<body>
+    
+    <header>
+        <h1>沖縄の観光スポット紹介</h1>
+        <p>マブヤーで登場したスポット</p>
+
+    </header>
+
+
+    <main>
+
+        <section class="intro">
+            <h2>沖縄のおすすめスポット</h2>
+            <p>
+              琉神マブヤーという沖縄の特撮的なので舞台になったスポットなどを五つ集めてみました。
+              下のほうでは土地としてのおすすめ理由を記載しています。
+            </p>
+
+            <p>
+                地図上のマーカーをクリックすると、
+                それぞれのスポットの写真と説明を見ることができます。
+            </p>
+
+        </section>
+
+
+        <section>
+
+            <h2 class="map-title">観光スポットマップ</h2>
+            <div id="map"></div>
+
+        </section>
+
+
+        <section class="spot-list">
+
+            <h2>紹介するスポット</h2>
+            <div class="spot">
+                <h3>残波岬</h3>
+                <p>
+                    読谷村の北西部にある岬です。
+                    美しい海と断崖の景色を見ることができます。
+                </p>
+            </div>
+
+
+            <div class="spot">
+                <h3>宇座</h3>
+                <p>
+                    読谷村の西側にある地域です。
+                    海に近く、沖縄の自然を感じられる場所です。
+                </p>
+            </div>
+
+
+            <div class="spot">
+                <h3>座喜味城跡</h3>
+                <p>
+                    読谷村にある歴史的なグスク跡です。
+                    美しい石垣が残っています。
+                </p>
+            </div>
+
+
+            <div class="spot">
+                <h3>むら咲むら</h3>
+                <p>
+                    沖縄の伝統文化や工芸などを
+                    体験することができる施設です。
+                </p>
+            </div>
+
+
+            <div class="spot">
+                <h3>ナスの御嶽</h3>
+                <p>
+                    北中城村にある歴史的な場所です。
+                    沖縄の文化や信仰を感じることができます。
+                </p>
+            </div>
+        </section>
+    </main>
+
+
+    <footer>
+        <p>沖縄の観光スポット紹介</p>
+    </footer>
+
+
+    <script>
+
+        function initMap() {
+            const center = {
+                lat: 26.40,
+                lng: 127.75
+            };
+
+        
+            const map = new google.maps.Map(
+                document.getElementById("map"),
+                {
+                    zoom: 11,
+                    center: center
+                }
+            );
+
+
+            const spots = [
+
+
+                // 残波岬
+                {
+                    name: "残波岬",
+                    position: {
+                        lat: 26.4371,
+                        lng: 127.7176
+                    },
+
+                    image: "images/zanpa.jpg",
+                    description:
+                        "沖縄本島中部の読谷村にある残波岬を舞台に、沖縄らしいおおらかな「テーゲー」の心を表すマブイストーン。"
+                },
+
+
+                // 宇座
+                {
+                    name: "宇座",
+                    position: {
+                        lat: 26.4329,
+                        lng: 127.7218
+                    },
+
+                    image: "images/uza.jpg",
+                    description:
+                        "沖縄の伝統文化が根付く読谷村の宇座周辺を舞台に、地域に受け継がれるエイサーの文化を表すマブイストーン。"
+                },
+
+
+                // 座喜味城跡
+                {
+                    name: "座喜味城跡",
+                    position: {
+                        lat: 26.4091,
+                        lng: 127.7417
+                    },
+
+                    image: "images/zakimi.jpg",
+                    description:
+                        "沖縄の歴史を感じられる読谷村の座喜味城跡周辺を舞台に、人とのつながりを大切にする沖縄の心を表すマブイストーン。"
+                },
+
+
+                // むら咲むら
+                {
+                    name: "むら咲むら",
+                    position: {
+                        lat: 26.3828,
+                        lng: 127.7390
+                    },
+
+                    image: "images/murasakimura.jpg",
+                    description:
+                        "沖縄の伝統文化を体験できる読谷村のむら咲むらを舞台に、祝いの場で人々が一緒に踊るカチャーシーの文化を表すマブイストーン。"
+                },
+
+
+                // ナスの御嶽
+                {
+                    name: "ナスの御嶽",
+                    position: {
+                        lat: 26.3040,
+                        lng: 127.7900
+                    },
+
+                    image: "images/nasu.jpg",
+                    description:
+                        "沖縄の信仰と自然が残る北中城村のナスの御嶽に関わり、沖縄で古くから大切にされてきた御嶽の文化を表すマブイストーン。"
+                }
+
+            ];
+
+
+            const infoWindow = new google.maps.InfoWindow();
+
+
+            spots.forEach(function(spot) {
+
+
+                const marker = new google.maps.Marker({
+                    position: spot.position,
+                    map: map,
+                    title: spot.name,
+                    icon: {
+                        url: "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
+                            <svg width="50" height="50" viewBox="0 0 50 50"
+                                xmlns="http://www.w3.org/2000/svg">
+                            <path d="M25 3
+                                    C10 8 8 22 17 31
+                                    C21 35 20 42 14 46
+                                    C28 47 40 38 40 25
+                                    C40 13 33 6 25 3Z"
+                                    fill="#20a99a"
+                                    stroke="white"
+                                    stroke-width="3"/>
+                            <circle cx="27" cy="20" r="5" fill="white"/>
+                            </svg>
+                        `),
+                        scaledSize: new google.maps.Size(40, 40)
+                    }
+                 });
+
+                marker.addListener(
+                    "click",
+                    function() {
+
+                        const content = `
+
+                            <div class="info-window">
+                                <img src="${spot.image}" alt="${spot.name}">
+
+                                <h3>
+                                    ${spot.name}
+                                </h3>
+
+                                <p>
+                                    ${spot.description}
+                                </p>
+                            </div>
+                        `;
+
+
+                        infoWindow.setContent(content);
+
+
+                        infoWindow.open({
+                            map: map,
+                            anchor: marker
+                        });
+                    }
+                );
+            });
+        }
+
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCAKLjisxFelKwIl1_G6MiEO9-ya7Twr5s&callback=initMap">
+    </script>
+
+</body>
+</html>
